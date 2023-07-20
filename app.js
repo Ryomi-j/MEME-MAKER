@@ -3,11 +3,11 @@ const ctx = canvas.getContext("2d");
 canvas.width = 800;
 canvas.height = 800;
 
-// ctx.fillRect(50, 50, 100, 200)
-ctx.rect(50, 50, 100, 100);
-ctx.fill();
+ctx.moveTo(50, 50) // 시작 좌표
+ctx.lineTo(150, 50) // 마무리 좌표
+ctx.lineTo(150, 150)
+ctx.lineTo(50, 150)
+ctx.lineTo(50, 50)
 
-ctx.beginPath(); // 경로 분리
-ctx.rect(150, 150, 100, 100);
-ctx.fillStyle = "red";
-ctx.fill();
+ctx.stroke()
+ctx.fill()
