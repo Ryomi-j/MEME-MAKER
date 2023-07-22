@@ -1,5 +1,6 @@
 const modeBtn = document.getElementById("mode-btn");
 const destroyBtn = document.getElementById("destroy-btn");
+const eraseBtn = document.getElementById("erase-btn");
 const colorOptions = Array.from(
   document.getElementsByClassName("color-option")
 );
@@ -70,6 +71,12 @@ const onDestroyClick = () => {
   ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 };
 
+const onEraseClick = () => {
+  ctx.strokeStyle = 'white'
+  isFilling = false
+  modeBtn.innerText = "Fill";
+}
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 
@@ -83,3 +90,4 @@ colorOptions.forEach((color) => color.addEventListener("click", onColorClick));
 
 modeBtn.addEventListener("click", onModeClick);
 destroyBtn.addEventListener("click", onDestroyClick);
+eraseBtn.addEventListener("click", onEraseClick);
