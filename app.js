@@ -1,3 +1,4 @@
+const saveBtn = document.getElementById("save");
 const textInput = document.getElementById("text");
 const fileInput = document.getElementById("file");
 const modeBtn = document.getElementById("mode-btn");
@@ -92,19 +93,26 @@ const onFileChange = (e) => {
 };
 
 const onDoubleClick = (e) => {
-  const text = textInput.value
-  if(text === '') return
-  
-  ctx.save() // ctx의 현재 상태, 생상, 스타일 등 모든 것을 저장
-  ctx.lineWidth = 1
-  ctx.font = "68px serif"
-  ctx.strokeText(text, e.offsetX, e.offsetY)
-  ctx.restore() // 이전 ctx 상태로 복구
-}
+  const text = textInput.value;
+  if (text === "") return;
 
-canvas.addEventListener('dblclick', onDoubleClick)
-// canvas.onmousemove = onMove
-canvas.addEventListener("mousemove", onMove); // 동일 이벤트 내에 여러개의 eventListener 추가 가능
+  ctx.save(); // ctx의 현재 상태, 생상, 스타일 등 모든 것을 저장
+  ctx.lineWidth = 1;
+  ctx.font = "68px serif";
+  ctx.strokeText(text, e.offsetX, e.offsetY);
+  ctx.restore(); // 이전 ctx 상태로 복구
+};
+
+const onSaveClick = () => {
+  const url = canvas.toDataURL(); // canvas의 그림을 url로 변환
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "제목없음.png"; // "제목없음.png"로 파일 저장
+  a.click(); // 파일 다운로드
+};
+
+canvas.addEventListener("dblclick", onDoubleClick);
+canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 
 canvas.addEventListener("mouseup", cancelPainting);
@@ -119,4 +127,4 @@ modeBtn.addEventListener("click", onModeClick);
 destroyBtn.addEventListener("click", onDestroyClick);
 eraseBtn.addEventListener("click", onEraseClick);
 fileInput.addEventListener("change", onFileChange);
-fileInput.onchange = onFileChange
+saveBtn.addEventListener("click", onSaveClick);
